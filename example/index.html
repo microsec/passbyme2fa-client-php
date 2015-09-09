@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Passby[ME] 2Fa authentication example</title>
+        <link rel="icon" type="image/x-icon" href="static/css/img/favicon.ico" />
+        <link rel="stylesheet" href='static/js/jquery/jquery-ui.css' type="text/css"/>
+        <link rel="stylesheet" href='static/css/pbm2FA.css' type="text/css"/>
+        <!-- Jquery -->
+        <script type='text/javascript' src='static/js/jquery/external/jquery/jquery.js'></script>
+        <script type='text/javascript' src='static/js/jquery/jquery-ui.min.js'></script>
+        <!-- PBM -->
+        <script type='text/javascript' src='static/js/pbm2FA.js'></script>
+        <script type='text/javascript' src='static/js/main.js'></script>
+    </head>
+    <body>
+        <h1>
+            PassBy[ME] two factor authentication client code example
+            <a href="https://www.passbyme.com">
+                <img src="static/css/img/passbyme_logo.png" style="float:right; border:0;" alt="PassBy[ME]">
+            </a>
+        </h1>
+        <p>
+        This example demonstrate, how <a href="https://www.passbyme.com" target="_blank">PassBy[ME]</a> authentication works with the passbyme2fa-client application.
+        </p>
+
+        <p>First of all you have to configure the example properly to get it work.
+        You can do that by creating a copy of the config.dist.php file and create your own config.php.
+        </p>
+        
+        <p>
+
+        For more details about the configuration properties please check the <a href="https://github.com/microsec/passbyme2fa-client-php/blob/master/README.md" target="_blank">README.md</a> file.</p>
+        
+        <p>To start the example add your <a href="https://www.passbyme.com" target="_blank">Passby[ME]</a> identifier and click the "Start Example" button below:</p>
+        <br/>
+        <input type="text" size="35" placeholder="Your PassBy[ME] Id" id="pbm_user_id">
+        <br/><br/>
+        You can also add your message here:<br/>
+        <textarea id="msg" cols="80" rows="10" maxlength="255"></textarea>
+        <br/>
+        <div id="chars"></div>
+        <br/>
+        <button id="start_example">Start Example</button>
+    </body>
+</html>
