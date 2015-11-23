@@ -7,8 +7,8 @@ namespace PassByME\TwoFactor;
  * You can download our API documentation after login.
  * 
  * @author     Microsec Ltd. <development@passbyme.com>
- * @copyright  (c) 2015, Microsec Ltd.   
- * @version    1.0.0
+ * @copyright  (c) 2015, Microsec Ltd.
+ *
  */
 
 class Send2FaRequest extends Curl
@@ -21,17 +21,19 @@ class Send2FaRequest extends Curl
 
     /**
      * Sending the request.
-     *  
-     * @param  string $url  Request URL
+     *
+     * @param  string $url Request URL
      * @param  string $type Request type (GET, POST, PUT, DELETE)
      * @param  string $data Json data
-     * @return string       Json 
+     * @return string Json
+     * @throws \Exception
      */
     public function sendRequest($url, $type, $data = '')
     {
         $this->log->info('Connecting to : ' . $url);
-        $caPath = dirname(__FILE__) . '/ca_bundle/cacert.cer';
-        $caInfo = empty(Config::get('ca_cert')) ? $caPath : Config::get('ca_cert');
+        $caBundle = dirname(__FILE__) . '/ca_bundle/cacert.cer';
+        $caCert = Config::get('ca_cert');
+        $caInfo = empty($caCert) ? $caBundle : $caCert;
         
         /**
          * cURL
@@ -77,8 +79,11 @@ class Send2FaRequest extends Curl
     /**
      * Validate cURL response by allowed PassBy[ME] Content-Types.
      * (Content-Type Header -> http://www.w3.org/Protocols/rfc1341/4_Content-Type.html)
-     * 
+     *
+     * @param $response
+     * @param $contentType
      * @return mixed
+     * @throws \Exception
      */
     private function responseContentTypeValidation($response, $contentType)
     {
@@ -113,11 +118,13 @@ class Send2FaRequest extends Curl
 
         return $response;
     }
+
     /**
      * Decode Json response
-     * 
-     * @param  json $resp
-     * @return mixed      
+     *
+     * @param  $resp
+     * @return mixed
+     * @throws \Exception
      */
     private function decodeResponse($resp)
     {

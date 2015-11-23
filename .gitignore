@@ -3,8 +3,6 @@
 ### PhpStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio
 
-*.iml
-
 ## Directory-based project format:
 .idea/
 # if you remove the above rule, at least ignore the following:
@@ -71,5 +69,5 @@ sftp-config.json
 
 ### OTHERS (edited by owner) ###
 .phpintel/
-conf/config.php
+example/conf/config.php
 

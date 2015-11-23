@@ -326,8 +326,8 @@ class Curl
 
     /**
      * Send the request.
-     * 
-     * @return self
+     * @return Curl
+     * @throws \Exception
      */
     public function send()
     {

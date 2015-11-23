@@ -32,7 +32,7 @@ use PassByME\TwoFactor\Config;
  * @author     Microsec Ltd. <development@passbyme.com>
  * @copyright  (c) 2015, Microsec Ltd.
  * @license    http://www.opensource.org/licenses/mit-license.php  MIT License
- * @version    1.0.0
+ * @version    1.0.1
  */
 
 /**
@@ -78,14 +78,15 @@ class Frontend extends Send2FaRequest
         parent::__construct($this->getLog());
     }
 
-   /**
-    * Starts a new 2nd factor authentication for a given user by sending a notification to the user's device.
-    * 
-    * @param  string $userIdentifier PassBy[ME] user identifier
-    * @param  string $msg            An arbitrary message to the user. Maximum size is 255 characters.
-    * @param  integer $timeout       Length of the second factor authentication session in seconds.
-    * @return string                 The request returns the identifier of the created session in json form. 
-    */
+    /**
+     * Starts a new 2nd factor authentication for a given user by sending a notification to the user's device.
+     *
+     * @param  string $userIdentifier PassBy[ME] user identifier
+     * @param  string $msg An arbitrary message to the user. Maximum size is 255 characters.
+     * @param  integer $timeout Length of the second factor authentication session in seconds.
+     * @return string The request returns the identifier of the created session in json form.
+     * @throws \Exception
+     */
     public function authenticationRequest($userIdentifier = '', $msg = '', $timeout = 0)
     {
         $this->log->info('Sending authentication request to PassBy[ME] API.');
@@ -137,11 +138,12 @@ class Frontend extends Send2FaRequest
     }
 
     /**
-     * This returns the status of an authentication, identified by the given sessionId. 
+     * This returns the status of an authentication, identified by the given sessionId.
      * The sessionId is obtained by calling the authenticationRequest method.
-     * 
+     *
      * @param  string $session The ID of the authentication session
-     * @return string          On success it returns the status of the authentication transaction in json form.
+     * @return string On success it returns the status of the authentication transaction in json form.
+     * @throws \Exception
      */
     public function authenticationProgress($session)
     {
@@ -170,8 +172,10 @@ class Frontend extends Send2FaRequest
 
     /**
      * This function cancels an existing authentication session, identified by the given sessionId.
-     * 
+     *
      * @param  string $session The ID of the authentication session
+     * @return string
+     * @throws \Exception
      */
     public function authenticationCancel($session)
     {
