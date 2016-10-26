@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PassBy[ME] example</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="https://www.passbyme.com/fav/favicon-16x16.png"
+          data-trid="20">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href='https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css' type="text/css"/>
+    <link rel="stylesheet" href='https://demo.passbyme.com/static/css/livedemo.css' type="text/css"/>
+    <link rel="stylesheet" href='https://www.passbyme.com/css/style.css' type="text/css"/>
+    <link rel="stylesheet" href='static/css/pbm2FA.css' type="text/css"/>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"
+            integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE=" crossorigin="anonymous"></script>
+    <!-- PBM -->
+    <script type='text/javascript' src='static/js/pbm2FA.js'></script>
+    <script type='text/javascript' src='static/js/main.js'></script>
+</head>
+<body>
+<div class="container">
+    <h1>
+        PassBy[ME] PHP client Messaging Examples
+    </h1>
+    <p>
+        This example demonstrate, how <a href="https://www.passbyme.com" target="_blank">PassBy[ME]</a> works with the
+        passbyme2fa-client PHP application.
+    </p>
+
+    <p>
+        First of all read the <a href="https://github.com/microsec/passbyme2fa-client-php#get-started">Get Started</a>
+        and <a href="https://github.com/microsec/passbyme2fa-client-php#configure-the-client">configuration</a> sections
+        from the project
+        GitHub page. Create your own config.php file under "conf" folder by making a copy of the config.dist.php file
+        and set your own configuration.</p>
+    <p>
+        If you use PassBy[ME] the first time you need a registered user with an enrolled device to send
+        messages to. Users can be created in two ways:
+    </p>
+    <div id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+                       aria-controls="collapseOne">
+                        from an administrator
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <ol>
+                    <li><p><a href="https://admin.passbyme.com/register/login">Log in</a> to your registered account
+                        (organization).</p></li>
+                    <li><p>Click on the <span class="glyphicon glyphicon-plus"></span><span
+                            class="glyphicon glyphicon-user"></span>
+                        icon under "Administrators" menu.</p></li>
+                    <li><p>Add your users PassBy[ME] Id and press the "OK" button.</p></li>
+                </ol>
+                <p>At the end of this process will you have a registered user in your PassBy[ME] system with the same
+                    enrolled device as your administrator.</p>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingTwo">
+                <h4 class="panel-title">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"
+                       aria-expanded="false" aria-controls="collapseTwo">
+                        individually
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                <ol>
+                    <li><p><a href="https://admin.passbyme.com/register/login">Log in</a> to your registered account
+                        (organization).</p></li>
+                    <li><p>Create a new user under "PassBy[ME] Users" menu by clicking on the "New user" button.</p>
+                    </li>
+                    <li><p>Add a new device to your user by clicking on the <span
+                            class="glyphicon glyphicon-phone"></span> icon.
+                    </p></li>
+                    <li><p>Click on "Add device enrollment" then download the enrollment sheet by clicking on the <span
+                            class="glyphicon glyphicon-download"></span> icon.</p></li>
+                    <li><p>Follow the instructions written on the enrollment sheet.</p></li>
+                </ol>
+                <p>
+                    At the end of these steps you will have a registered user with an enrolled device.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <h2>Authorization and General Messaging</h2>
+    <div class="alert alert-info">Sending messages successfully with
+        the messaging system you need to know the user's PassBy[ME] Id, which you can find on the administration
+        interface under "PassBy[ME] Users" menu by clicking on the first icon next to each users row.
+    </div>
+    <p>Fill all the form elements below.</p>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="pbm_user_id">PassBy[ME] Id</label>
+        <input class="pbm-input" type="text" size="35" id="pbm_user_id"
+               value="">
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="subject">Subject</label>
+        <input class="pbm-input" id="subject" name="subject" maxlength="255"
+               value="PBM example subject"/>
+    </div>
+    Your message here:<br/>
+    <textarea title="Message" id="msg" cols="70" rows="6" maxlength="4094">This is a test message from PassBy[ME] 2FA PHP SDK!</textarea>
+    <br/>
+    <div id="chars"></div>
+    <br/>
+    <a class="btn btn-primary btn-xl" id="authorization">Authorization</a>
+    <a class="btn btn-primary btn-xl" id="generalMessage">General Message</a>
+</div>
+</body>
+</html>

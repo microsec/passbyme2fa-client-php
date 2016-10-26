@@ -12,11 +12,12 @@
         }
     ],    
     "require": {
-       "php": ">=5.3.2"
+       "php": ">=5.5.12"
     },
     "autoload": {
         "psr-4": {
-            "PassByME\\Authentication\\": "PassByME/Authentication/",
+            "PassByME\\Methods\\": "PassByME/Methods/",
+            "PassByME\\Log\\": "PassByME/Log/",
             "PassByME\\TwoFactor\\": "PassByME/TwoFactor/"
         }
     }

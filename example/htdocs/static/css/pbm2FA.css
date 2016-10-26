@@ -1,0 +1,63 @@
+.pbm-icon-default {
+    background-image: url('../img/pbm-icon.png');
+    margin-top: 5px;
+}
+.pbm-icon-error {
+    background-image: url('../img/pbm-error.png');
+    margin-top: -5px;
+}
+
+.pbm-logo {
+    background-image: url('../img/pbm-logo.png');
+    width: 209px;
+    height: 209px;
+    float: right;
+}
+
+.pbm-dialog-icon {
+    width: 70px;
+    height: 70px;
+    float: left;
+    margin-right: 20px;
+}
+.pbm-dialog-text {
+    text-align: justify;
+    text-justify: inter-word;
+}
+.pbm-dialog-right {
+    margin-left: 90px
+}
+
+.pbm-dialog-right > a {
+    color: #8ec56b !important;
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    padding: 10px;
+}
+
+#qrcode-container {
+    width: 256px;
+    height: 256px;
+}
+.panel {
+    margin-bottom: 5px;
+}
+.panel-collapse {
+    padding: 15px;
+}
+ol {
+    padding-left: 15px;
+}
+
+label {
+    line-height: 50px;
+}
+
+input.pbm-input {
+    background-color: #EEF2F3 !important;
+}

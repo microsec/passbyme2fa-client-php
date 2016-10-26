@@ -1,40 +1,53 @@
 <?php
-namespace PassByME\TwoFactor;
-
 /**
  * This is the configuration class for PassBy[ME] 2Fa communication.
  * This class can be used as main config or you can set these properties in your own code.
- * 
+ *
  * Example:
  * Config::set('aut_api_url', 'https://auth-sp.passbyme.com/frontend');
  * Config::set('curl_debug', true);
  * ...
- * 
  */
+namespace PassByME\TwoFactor;
 
 class Config
 {
     private static $config = array(
         /**
-         * PassBy[ME] URL for authentication API webservice.
+         * Authentication API webservice url
          * @var string
          */
-        'aut_api_url' => 'https://auth-sp.passbyme.com/frontend',
+        'auth_url' => 'https://auth-sp.passbyme.com/frontend',
+        /**
+         * Application PEM file.
+         * @var string
+         */
+        'auth_cert' => '',
+        /**
+         * Application PEM password.
+         * @var string
+         */
+        'auth_pwd' => '',
+        /**
+         * Management API webservice url
+         * @var string
+         */
+        'mng_url' => 'https://api.passbyme.com/register',
+        /**
+         * Organisation PEM file.
+         * @var string
+         */
+        'mng_cert' => '',
+        /**
+         * Organisation PEM file password.
+         * @var string
+         */
+        'mng_pwd' => '',
         /**
          * CA certificate path.
          * @var string
          */
         'ca_cert' => '',
-       /**
-         * Application certificate path (.pem)
-         * @var string
-         */
-        'cert_file' => '',
-        /**
-         * Application certificate key path (.key)
-         * @var string
-         */
-        'cert_key' => '',
         /**
          * The maximum number of seconds to allow cURL functions to execute.
          * @var integer
@@ -81,12 +94,12 @@ class Config
          */
         'curl_proxyuserpwd' => ''
     );
-    
+
     public static function get($item)
     {
         return self::$config[$item];
     }
-    
+
     public static function set($item, $value)
     {
         self::$config[$item] = $value;

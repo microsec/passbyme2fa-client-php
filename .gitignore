@@ -70,4 +70,7 @@ sftp-config.json
 ### OTHERS (edited by owner) ###
 .phpintel/
 example/conf/config.php
+tests/PassByME/bootstrap.php
 
+
+tests/_output/*

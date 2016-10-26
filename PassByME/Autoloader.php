@@ -14,13 +14,14 @@ namespace PassByME;
 /**
  * Load files by namespace convention.
  * 
- * @param namespace $namespace
+ * @param string $namespace
  * @return mixed
  */
 function load($namespace)
 {
     $path = str_replace('\\', DIRECTORY_SEPARATOR, $namespace, $count);
-    if ($count > 0) {
+    $split = explode('\\', $path, 2);
+    if ($count > 0 and $split[0] == basename(dirname(__FILE__))) {
         $ret = include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR  . $path . '.php');
     } else {
         $ret = false;

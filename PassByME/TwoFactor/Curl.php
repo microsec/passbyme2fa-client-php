@@ -8,63 +8,63 @@ class Curl
 {
     /**
      * Body returned by the last request.
-     * 
+     *
      * @var string
      */
     protected $body;
 
     /**
      * Actual cURL connection handle.
-     * 
+     *
      * @var resource
      */
     protected $ch;
 
     /**
      * Data to send to server.
-     * 
+     *
      * @var mixed
      */
     protected $data;
 
     /**
      * Response code from the last request.
-     * 
+     *
      * @var integer
      */
     protected $status;
 
     /**
      * Request type.
-     * 
+     *
      * @var string
      */
-    public $type;
+    protected $type;
 
     /**
      * Url for the connection.
-     * 
+     *
      * @var string
      */
     protected $url;
-    
+
     /**
-     * If true write cURL connection informations to log.
-     * 
+     * If true write cURL connection information's to log.
+     *
      * @var boolean
      */
     protected $debug;
-    
+
     /**
      * Logger instance.
-     * 
+     *
      * @var object
      */
-    public $log;
+    protected $log;
 
     /**
      * cURL constructor.
-     * 
+     *
      * @param object $logger
      */
     public function __construct($logger)
@@ -76,6 +76,9 @@ class Curl
         $this->type = 'GET';
         $this->url = null;
         $this->debug = false;
+        $this->cainfo = '';
+        $this->sslcert = '';
+        $this->sslcertPwd = '';
         $this->log = $logger;
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, true);
@@ -86,31 +89,21 @@ class Curl
     }
 
     /**
-     * cURL close event.
-     */
-    public function __destruct()
-    {
-        if (property_exists($this, 'ch')) {
-            curl_close($this->ch);
-        }
-    }
-
-    /**
      * Return the body returned by the last request.
-     * 
+     *
      * @return string
      */
-    public function getResponse()
+    protected function getResponse()
     {
         return $this->body;
     }
 
     /**
      * Return the request content type
-     * 
+     *
      * @return string
      */
-    public function getContentType()
+    protected function getContentType()
     {
         return curl_getinfo($this->ch, CURLINFO_CONTENT_TYPE);
     }
@@ -118,11 +111,11 @@ class Curl
     /**
      * Set the payload for the request.
      * This can either by a string, formatted like a query string or a single-dimensional array.
-     * 
+     *
      * @param mixed $data
      * @return self
      */
-    public function setData($data)
+    protected function setData($data)
     {
         if (is_array($data)) {
             $data = http_build_query($data);
@@ -133,21 +126,21 @@ class Curl
 
     /**
      * Return the status code for the last request.
-     * 
+     *
      * @return integer
      */
-    public function getStatusCode()
+    protected function getStatusCode()
     {
         return $this->status;
     }
 
     /**
      * Set the type of request to make (GET, POST, DELETE)
-     * 
+     *
      * @param string $type Request type to send.
      * @return self
      */
-    public function setType($type)
+    protected function setType($type)
     {
         $this->type = $type;
         curl_setopt($this->ch, CURLOPT_CUSTOMREQUEST, $type);
@@ -156,11 +149,11 @@ class Curl
 
     /**
      * Set the URL to make an HTTP connection to.
-     * 
+     *
      * @param string $url URL to connect to.
      * @return self
      */
-    public function setUrl($url)
+    protected function setUrl($url)
     {
         $this->url = $url;
         curl_setopt($this->ch, CURLOPT_URL, $url);
@@ -173,45 +166,49 @@ class Curl
      * @param mixed $sslCert The path of a file containing a PEM formatted certificate.
      * @return self
      */
-    public function setSslCert($sslCert)
+    protected function setSslCert($sslCert)
     {
+        $this->sslcert = $sslCert;
         curl_setopt($this->ch, CURLOPT_SSLCERT, $sslCert);
         return $this;
     }
 
     /**
-     * Sets the value of sslKey.
+     * Sets certificate password.
      *
-     * @param mixed $sslKey The path of a file containing a private SSL key.
-     * @return self
+     * @param $pwd
+     * @return static
+     * @throws PBMErrorException
      */
-    public function setSslKey($sslKey)
+    protected function setSslCertPwd($pwd)
     {
-        curl_setopt($this->ch, CURLOPT_SSLKEY, $sslKey);
+        $this->sslcertPwd = $pwd;
+        curl_setopt($this->ch, CURLOPT_SSLCERTPASSWD, $pwd);
         return $this;
     }
 
     /**
-     * Sets the value of cainfo.
+     * Sets the path of CA certificate file.
      *
-     * @param mixed $cainfo the cainfo
+     * @param mixed $caInfo
      * @return self
      */
-    public function setCainfo($cainfo)
+    protected function setCaInfo($caInfo)
     {
-        curl_setopt($this->ch, CURLOPT_CAINFO, $cainfo);
+        $this->cainfo = $caInfo;
+        curl_setopt($this->ch, CURLOPT_CAINFO, $caInfo);
         return $this;
     }
 
-     /**
-     * Sets the value of connectiontimeout.
+    /**
+     * Sets the value of connection timeout.
      *
-     * @param mixed $connectiontimeout the connectiontimeout
+     * @param mixed $connectionTimeout
      * @return self
      */
-    public function setConnectiontimeout($connectiontimeout)
+    protected function setConnectionTimeout($connectionTimeout)
     {
-        curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, $connectiontimeout);
+        curl_setopt($this->ch, CURLOPT_CONNECTTIMEOUT, $connectionTimeout);
         return $this;
     }
 
@@ -221,7 +218,7 @@ class Curl
      * @param mixed $timeout the timeout
      * @return self
      */
-    public function setTimeout($timeout)
+    protected function setTimeout($timeout)
     {
         curl_setopt($this->ch, CURLOPT_TIMEOUT, $timeout);
         return $this;
@@ -233,7 +230,7 @@ class Curl
      * @param mixed $maxredirs the maxredirs
      * @return self
      */
-    public function setMaxredirs($maxredirs)
+    protected function setMaxredirs($maxredirs)
     {
         curl_setopt($this->ch, CURLOPT_MAXREDIRS, $maxredirs);
         return $this;
@@ -242,12 +239,12 @@ class Curl
     /**
      * The X-PBM-API-VERSION custom HTTP header value of the current using Authentication API version.
      *
-     * @param mixed $httpheader the httpheader
+     * @param mixed $httpHeader
      * @return self
      */
-    public function setPbmApiVersionHeader($httpheader)
+    protected function setPbmApiVersionHeader($httpHeader)
     {
-        curl_setopt($this->ch, CURLOPT_HTTPHEADER, array('X-PBM-API-VERSION: ' . $httpheader ));
+        curl_setopt($this->ch, CURLOPT_HTTPHEADER, array('X-PBM-API-VERSION: ' . $httpHeader));
         return $this;
     }
 
@@ -258,7 +255,7 @@ class Curl
      * @param mixed $proxyport the proxyport
      * @return self
      */
-    public function setProxyport($proxyport)
+    protected function setProxyport($proxyport)
     {
         curl_setopt($this->ch, CURLOPT_PROXYPORT, $proxyport);
         return $this;
@@ -270,7 +267,7 @@ class Curl
      * @param mixed $proxy the proxy
      * @return self
      */
-    public function setProxy($proxy)
+    protected function setProxy($proxy)
     {
         curl_setopt($this->ch, CURLOPT_PROXY, $proxy);
         return $this;
@@ -282,7 +279,7 @@ class Curl
      * @param mixed $proxytype the proxytype
      * @return self
      */
-    public function setProxytype($proxytype)
+    protected function setProxytype($proxytype)
     {
         curl_setopt($this->ch, CURLOPT_PROXYTYPE, $proxytype);
         return $this;
@@ -294,7 +291,7 @@ class Curl
      * @param mixed $proxyuserpwd the proxyuserpwd
      * @return self
      */
-    public function setProxyuserpwd($proxyuserpwd)
+    protected function setProxyuserpwd($proxyuserpwd)
     {
         curl_setopt($this->ch, CURLOPT_PROXYUSERPWD, $proxyuserpwd);
         return $this;
@@ -306,7 +303,7 @@ class Curl
      * @param mixed $useragent the useragent
      * @return self
      */
-    public function setUseragent($useragent)
+    protected function setUseragent($useragent)
     {
         curl_setopt($this->ch, CURLOPT_USERAGENT, $useragent);
         return $this;
@@ -318,19 +315,73 @@ class Curl
      * @param boolean $debug the debug
      * @return self
      */
-    public function setDebug($debug)
+    protected function setDebug($debug)
     {
         $this->debug = $debug;
         return $this;
     }
 
+
+    /**
+     * Check certificates
+     *
+     * @param $cert
+     * @throws PBMErrorException
+     */
+    private function checkCert($cert)
+    {
+        $certData = $this->isCertAvailable($cert);
+        $from = new \DateTime();
+        $from = $from->setTimestamp($certData['validFrom_time_t']);
+        $to = new \DateTime();
+        $to = $to->setTimestamp($certData['validTo_time_t']);
+        $now = new \DateTime('now');
+        $this->log->debug('Certificate: ' . $cert);
+        $this->log->debug('Certificate valid between: ' . $from->format('Y-m-d') . ' and ' . $to->format('Y-m-d'));
+        if (!($from < $now and $to > $now)) {
+            throw new PBMErrorException('Certificate has expired!');
+        }
+    }
+
+    /**
+     * Check certificate file configuration
+     *
+     * @param $certFile
+     * @return array
+     * @throws PBMErrorException
+     */
+    private function isCertAvailable($certFile)
+    {
+        if (!empty($certFile)) {
+            $cert = file_get_contents($certFile);
+            if ($cert === false) {
+                throw new PBMErrorException('Can not read cert file! (' . $certFile . ')');
+            } else {
+                $certData = openssl_x509_parse($cert);
+                if (is_array($certData)) {
+                    return $certData;
+                } else {
+                    throw new PBMErrorException('Can not read certificate properties.');
+                }
+            }
+        } else {
+            throw new PBMErrorException('No certificate file found!');
+        }
+    }
+
     /**
      * Send the request.
      * @return Curl
-     * @throws \Exception
+     * @throws PBMErrorException()
      */
-    public function send()
+    protected function send()
     {
+        $this->log->debug('Checking connection certificates.');
+        $this->checkCert($this->cainfo);
+        $this->checkCert($this->sslcert);
+        if (!$this->sslcertPwd) {
+            throw new PBMErrorException('Missing certificate password!');
+        }
         switch (strtolower($this->type)) {
             case 'get':
             case 'delete':
@@ -343,24 +394,39 @@ class Curl
                 curl_setopt($this->ch, CURLOPT_POSTFIELDS, $this->data);
                 break;
             default:
-                throw new \Exception('Unsupported request type: ' . $this->type);
+                throw new PBMErrorException('Unsupported request type: ' . $this->type);
         }
 
+        $curl_file = tempnam('', 'res');
+        $handle = fopen($curl_file, 'w');
+
         if ($this->debug) {
-            $curl_file = tempnam('', 'res');
-            $handle = fopen($curl_file, 'w');
             curl_setopt($this->ch, CURLOPT_VERBOSE, true);
             curl_setopt($this->ch, CURLOPT_STDERR, $handle);
         }
-        
         $this->body = curl_exec($this->ch);
         $this->status = curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
 
-        if ($this->debug) {
-            $this->log->info('Curl result: ' . file_get_contents($curl_file));
-            fclose($handle);
-            unlink($curl_file);
+        if ($error = curl_errno($this->ch)) {
+            $this->log->error('cURL error code: ' . $error);
+            $this->log->error('cURL message: ' . curl_error($this->ch));
         }
+        if ($this->debug) {
+            $this->log->debug('Curl result: ' . file_get_contents($curl_file));
+        }
+        fclose($handle);
+        unlink($curl_file);
+
         return $this;
+    }
+
+    /**
+     * cURL close event.
+     */
+    public function __destruct()
+    {
+        if (property_exists($this, 'ch')) {
+            curl_close($this->ch);
+        }
     }
 }
