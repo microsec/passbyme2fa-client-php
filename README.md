@@ -38,11 +38,11 @@ Without composer use the built in autoloader:
 
 You'll need a **PassBy[ME] account**, and a **certificate** to allow access to the PassBy[ME] API.
 
-#### 1. Login to Your Account
+### 1. Login to Your Account
 If you have not registered before [register](https://admin.passbyme.com/register/registration) a new organisation or [log in](https://admin.passbyme.com/register/login) to your administration interface.
 Note that the registration process requires an Android, Windows Phone or iOS device with a PassBy[ME] application installed.
 
-#### 2. Download Certificates
+### 2. Download Certificates
 Log in to your PassBy[ME] administration interface to download the required certificate files.
 
 ##### Download application certificate: 
