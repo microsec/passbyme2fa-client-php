@@ -1,8 +1,8 @@
 {
-    "name": "microsec/passbyme2fa-client-php",
+    "name": "microsec/passbyme-client-php",
     "description": "Authentication SDK for PassBy[ME] 2FA solution",
     "license": "MIT",
-    "keywords": ["passbyme","2fa", "authentication", "microsec"],
+    "keywords": ["passbyme","2fa", "authentication", "microsec", "mobile id", "esign", "electronic signature"],
     "homepage": "https://www.passbyme.com",
     "authors": [
         {
@@ -10,7 +10,7 @@
             "email": "develop@microsec.hu",
             "homepage": "https://www.microsec.hu"
         }
-    ],    
+    ],
     "require": {
        "php": ">=5.5.12"
     },
