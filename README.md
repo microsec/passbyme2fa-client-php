@@ -1,4 +1,4 @@
-# PassBy[ME] two-factor authentication client
+# PassBy[ME] Mobile Id client
 
 This library provides you with functionality to handle PassBy[ME] REST API methods.
 
@@ -16,7 +16,7 @@ In your `composer.json`:
 ``` json
 {
     "require": {
-        "microsec/passbyme2fa-client-php": "[version number]"
+        "microsec/passbyme-client-php": "[version number]"
     }
 }
 ```
