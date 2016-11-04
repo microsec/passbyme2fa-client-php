@@ -16,7 +16,7 @@ In your `composer.json`:
 ``` json
 {
     "require": {
-        "microsec/passbyme-client-php": "[version number]"
+        "microsec/passbyme2fa-client-php": "[version number]"
     }
 }
 ```
