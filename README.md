@@ -1,4 +1,4 @@
-# PassBy[ME] Mobile Id client
+# PassBy[ME] Mobile ID client
 
 This library provides you with functionality to handle PassBy[ME] REST API methods.
 
