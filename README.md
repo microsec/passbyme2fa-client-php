@@ -9,7 +9,7 @@ For further information on PassBy[ME] please visit: [www.passbyme.com](https://w
 - libcurl
 
 ## Installation
-PassBy[ME]2FA client is available via Composer/Packagist.
+PassBy[ME] client is available via Composer/Packagist.
 
 In your `composer.json`:
 
@@ -27,7 +27,7 @@ composer require microsec/passbyme-client-php
 
 Alternatively, copy the contents of the "PassByME" folder into somewhere that's in your PHP `include_path` settings or just click the 'zip' button at the top of the page in GitHub to download the archive.
 
-## Require passbyme2fa-client in your code
+## Require passbyme-client in your code
 If you use composer just load the composer autoloader:
 - `require_once 'vendor/autoload.php';`
 
