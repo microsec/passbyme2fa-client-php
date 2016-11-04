@@ -16,13 +16,13 @@ In your `composer.json`:
 ``` json
 {
     "require": {
-        "microsec/passbyme-client-php": "[version number]"
+        "microsec/passbyme2fa-client-php": "[version number]"
     }
 }
 ```
 From the Command Line:
 ```
-composer require microsec/passbyme-client-php
+composer require microsec/passbyme2fa-client-php
 ```
 
 Alternatively, copy the contents of the "PassByME" folder into somewhere that's in your PHP `include_path` settings or just click the 'zip' button at the top of the page in GitHub to download the archive.

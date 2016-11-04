@@ -1,5 +1,5 @@
 {
-    "name": "microsec/passbyme-client-php",
+    "name": "microsec/passbyme2fa-client-php",
     "description": "Authentication SDK for PassBy[ME] 2FA solution",
     "license": "MIT",
     "keywords": ["passbyme","2fa", "authentication", "microsec", "mobile id", "esign", "electronic signature"],
