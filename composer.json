@@ -1,5 +1,6 @@
 {
     "name": "microsec/passbyme2fa-client-php",
+    "description": "PassBy[ME] Mobile ID SDK",
     "license": "MIT",
     "keywords": ["passbyme","2fa", "authentication", "microsec", "mobile id", "esign", "electronic signature"],
     "homepage": "https://www.passbyme.com",
