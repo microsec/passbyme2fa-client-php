@@ -9,7 +9,7 @@ For further information on PassBy[ME] please visit: [www.passbyme.com](https://w
 - libcurl
 
 ## Installation
-PassBy[ME] client is available via Composer/Packagist.
+PassBy[ME]2FA client is available via Composer/Packagist.
 
 In your `composer.json`:
 
@@ -27,7 +27,7 @@ composer require microsec/passbyme2fa-client-php
 
 Alternatively, copy the contents of the "PassByME" folder into somewhere that's in your PHP `include_path` settings or just click the 'zip' button at the top of the page in GitHub to download the archive.
 
-## Require passbyme-client in your code
+## Require passbyme2fa-client in your code
 If you use composer just load the composer autoloader:
 - `require_once 'vendor/autoload.php';`
 
@@ -61,7 +61,6 @@ We suggest you to read the available [Management API User Guides](https://www.pa
 ### 3. Configure the client
 To start to communicate with the PassBy[ME] API first you have to configure the client. There is a Config.php class for that purpose. You can use directly that class to store your configuration or set your configuration settings in your own code like below.
 ```
-<?php
 use PassByME\TwoFactor\Config;
 
 Config::set('aut_api_url', 'https://auth-sp.passbyme.com/frontend');
@@ -75,7 +74,7 @@ The most important configuration settings you have to set properly are the follo
 - **mng_pwd :** Management certificate file password.
 - **auth_url :** The address of the PassBy[ME] authentication service to use. By default, the SDK will connect to the https://auth-sp.passbyme.com/frontend URL.
 - **mng_url :** The address of the PassBy[ME] management service to use. By default, the SDK will connect to the https://api.passbyme.com/register URL.
-- **ca_cert:** The CA certificate path to create the connection with the API. The CA certificate can be found in the ca_bundle folder.
+- **ca_cert:** The CA certificate path to create the connection with the API. The CA certificate can be found in the ca_bundle folder, which is the default setting of this property.
 
 Other optional configuration parameters:
 - **curl_timeout:** The maximum number of seconds to allow cURL functions to execute. The default value is 30 seconds.
@@ -98,7 +97,6 @@ The interface offers you the following log levels:
 
 #### Example
 ```php
-<?php
 namespace YourLogger;
 
 class Logger implements PassByME\Log\ILogger
@@ -117,7 +115,6 @@ class Logger implements PassByME\Log\ILogger
 
 Then you can simply add your logging class to the PassBy[ME] client like this:
 ```php
-<?php
 $logger = new YourLogger\Logger();
 $pbm = new PassByME\Methods\Messaging($logger);
 ```
@@ -194,7 +191,6 @@ This function cancels an existing authentication session, identified by the give
 
 PassBy[ME] administration methods are available through the Management class.
 ```php
-<?php
 $logger = new YourLogger\Logger();
 $pbm = new PassByME\Methods\Management($logger);
 ```

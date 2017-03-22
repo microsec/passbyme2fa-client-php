@@ -13,21 +13,21 @@ namespace PassByME;
 
 /**
  * Load files by namespace convention.
- * 
+ *
  * @param string $namespace
- * @return mixed
+ * @throws \Exception
  */
 function load($namespace)
 {
-    $path = str_replace('\\', DIRECTORY_SEPARATOR, $namespace, $count);
-    $split = explode('\\', $path, 2);
-    if ($count > 0 and $split[0] == basename(dirname(__FILE__))) {
-        $ret = include_once(dirname(__DIR__) . DIRECTORY_SEPARATOR  . $path . '.php');
-    } else {
-        $ret = false;
+    $path = str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
+    $classFile = dirname(__DIR__) . DIRECTORY_SEPARATOR . $path . '.php';
+
+    if (!is_file($classFile)) {
+        throw new \Exception('Autoloader error! No such file: ' . $classFile);
     }
 
-    return $ret;
+    /** @noinspection PhpIncludeInspection */
+    include_once($classFile);
 }
 
 spl_autoload_register(__NAMESPACE__ . '\load');
