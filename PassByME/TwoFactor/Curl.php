@@ -84,7 +84,7 @@ class Curl
         curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, true);
         curl_setopt($this->ch, CURLOPT_SSLCERTTYPE, 'PEM');
         curl_setopt($this->ch, CURLOPT_SSLKEYTYPE, 'PEM');
-        curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($this->ch, CURLOPT_FOLLOWLOCATION, Config::get('curl_follow_location'));
         curl_setopt($this->ch, CURLOPT_AUTOREFERER, true);
     }
 

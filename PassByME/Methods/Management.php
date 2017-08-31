@@ -338,24 +338,6 @@ class Management extends Send2FaRequest
     }
 
     /**
-     * Add an existing administrator as a new PassBy[ME] user.
-     *
-     * @param string $userId The user will be created with this PassBy[ME] ID.
-     * @param string $adminId Same as the login name (email address)
-     * @return object|string
-     * @throws PBMErrorException
-     */
-    public function createUserFromAdmin($userId, $adminId)
-    {
-        $this->log->debug('Sending add admin as new user request to PassBy[ME] management API.');
-        return parent::prepareAndSend(
-            $this->mng_url . '/rest/administrators/user',
-            'POST',
-            array('userId' => $userId, 'adminId' => $adminId)
-        );
-    }
-
-    /**
      * Create a new invitation. Finishing the invitation process a new administrator will be created.
      *
      * @return object|string

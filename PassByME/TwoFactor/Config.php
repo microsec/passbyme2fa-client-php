@@ -73,6 +73,11 @@ class Config
          * @var boolean
          */
         'curl_debug' => false,
+	    /**
+	     * cURL debug log path. Leave empty to use system tmp folder.
+	     * @var string
+	     */
+	    'curl_debug_log_path' => '',
         /**
          * cURL Proxy type.
          * @var string
@@ -92,7 +97,12 @@ class Config
          * cURL Proxy user/pwd
          * @var string
          */
-        'curl_proxyuserpwd' => ''
+        'curl_proxyuserpwd' => '',
+	    /**
+	     * cURL follow Location: header
+	     * @var boolean
+	     */
+	    'curl_follow_location' => false
     );
 
     public static function get($item)

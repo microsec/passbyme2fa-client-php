@@ -82,6 +82,8 @@ Other optional configuration parameters:
 - **curl_connecttimeout:** The number of seconds to wait while trying to connect. The default value is 120 seconds.
 - **curl_useragent:** The contents of the "User-Agent:" header to be used in an HTTP request. The default value is empty.
 - **curl_debug:** Writes cURL output information to log files. Optional values are true or false. The default value is false.
+- **curl_debug_log_path:** cURL debug log file path. Leave it empty to use system temp directory.
+- **curl_follow_location:** Follow any Location: header that the server sends as part of a HTTP header in a 3xx response. Default value false.
 - **curl_proxytype:** cURL Proxy type. The default value is HTTP.
 - **curl_proxy:** The HTTP proxy to tunnel requests through.
 - **curl_proxyport:** The port number of the proxy to connect to.
@@ -350,17 +352,6 @@ Deletes the specified userId (alias) of the specified PassBy[ME] user.
 $pbm->getListOfAdministrators();
 ```
 Returns the list of administrators.
-
-#### *createUserFromAdmin*
-```php
-$pbm->createUserFromAdmin([userId], [adminId]);
-```
-Add an existing administrator as a new PassBy[ME] user.
-
-| Parameter | Mandatory | Type | Description |
-| --------- | --------- | ---- | ----------- |
-| userId | Required | String | The user will be created with this PassBy[ME] ID. |
-| adminId | Required | String | Same as the login name (email address) |
 
 #### *createInvitation*
 ```php
