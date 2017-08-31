@@ -397,7 +397,7 @@ class Curl
                 throw new PBMErrorException('Unsupported request type: ' . $this->type);
         }
 
-        $curl_file = tempnam('', 'res');
+        $curl_file = tempnam(Config::get('curl_debug_log_path'), 'res');
         $handle = fopen($curl_file, 'w');
 
         if ($this->debug) {
